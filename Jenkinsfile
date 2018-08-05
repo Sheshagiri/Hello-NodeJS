@@ -11,7 +11,7 @@ node {
         /* This builds the actual image; synonymous to
          * docker build on the command line */
 
-        app = docker.build("admin/hellonodejs:${env.BUILD_NUMBER}")
+        app = docker.build("${env.registry}/${env.repository}/hellonodejs:${env.BUILD_NUMBER}")
     }
 
     stage('Test image') {
@@ -26,7 +26,7 @@ node {
          * First, the incremental build number from Jenkins
          * Second, the 'latest' tag.
          * Pushing multiple tags is cheap, as all the layers are reused. */
-        docker.withRegistry('https://e900f8c0-2ccd-4e98-a9d7-3a58661dcecc.dtr.dockertrial.com', 'docker-hub') {
+        docker.withRegistry('https://${env.registry}', 'quay-io') {
             app.push("${env.BUILD_NUMBER}")
             app.push("latest")
         }
