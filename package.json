@@ -1,7 +1,7 @@
 {
-  "name": "hellonodejs",
+  "name": "Hello-NodeJS",
   "version": "1.0.0",
-  "description": "A Hello World HTTP server",
+  "description": "A simple hello world HTTP server that runs in a container.",
   "main": "main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/sheshagiri/hellonodejs/"
+    "url": "https://github.com/Sheshagiri/Hello-NodeJS"
   },
   "keywords": [
     "node",
