@@ -1,5 +1,6 @@
 node {
     def app
+    def container_name = "hellonodejs"
 
     stage('Clone repository') {
         /* Let's make sure we have the repository cloned to our workspace */
@@ -31,4 +32,14 @@ node {
             app.push("latest")
         }
     }
+
+    stage('Create service') {
+        createService(container_name)   
+    }
+}
+
+def createService(containerName){
+    sh "docker create service --name $containerName --publish 8000:8000 $containerName:latest"
+    echo "Service got created and runs on port 8000"
+    sh "docker service ls"
 }
