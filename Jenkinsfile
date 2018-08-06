@@ -44,13 +44,13 @@ def createService(containerName){
     echo "Number of docker service's for $containerName: ${docker_services}"
     if (docker_services != "0") {
         sh "docker service ls"
-        echo "docker service is already created, will update the service with new image instead of creating a new one."
-        sh "docker service update --image $containerName:latest $containerName"
+        echo "docker service is already created, will update the service with new image(${env.registry}/${env.repository}/hellonodejs:${env.BUILD_NUMBER}) instead of creating a new one"
+        sh "docker service update --image ${env.registry}/${env.repository}/hellonodejs:${env.BUILD_NUMBER} $containerName"
         echo "updated docker service"
         sh "docker service ls"
     } else {
-        echo "docker service is not created, creating a new service now"
-        sh "docker service create --name $containerName --publish 8000:8000 $containerName:latest"
+        echo "docker service is not created, creating a new service now with ${env.registry}/${env.repository}/hellonodejs:${env.BUILD_NUMBER} as image"
+        sh "docker service create --name $containerName --publish 8000:8000 ${env.registry}/${env.repository}/hellonodejs:${env.BUILD_NUMBER}"
         echo "Service got created and runs on port 8000"
     }
     //echo "Removing docker service"
