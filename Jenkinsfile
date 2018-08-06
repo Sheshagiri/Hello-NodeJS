@@ -39,7 +39,7 @@ node {
 }
 
 def createService(containerName){
-    sh "docker create service --name $containerName --publish 8000:8000 $containerName:latest"
+    sh "docker service create --name $containerName --publish 8000:8000 $containerName:latest"
     echo "Service got created and runs on port 8000"
     sh "docker service ls"
 }
