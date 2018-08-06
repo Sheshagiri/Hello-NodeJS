@@ -39,12 +39,21 @@ node {
 }
 
 def createService(containerName){
-    sh "docker service create --name $containerName --publish 8000:8000 $containerName:latest"
-    echo "Service got created and runs on port 8000"
     sh "docker service ls"
-    docker_services = sh "docker service ls --filter name=hellonodejs | grep -w hellonodejs | wc -l"
-    echo $docker_services
-    echo "Removing docker service"
-    sh "docker service rm hellonodejs"
-    sh "docker service ls"
+    def docker_services = sh (script: "docker service ls --filter name=$containerName | grep -w $containerName | wc -l", returnStdout: true).toString().trim()
+    echo "Number of docker service's for $containerName: ${docker_services}"
+    if (docker_services != "0") {
+        sh "docker service ls"
+        echo "docker service is already created, will update the service with new image instead of creating a new one."
+        sh "docker service update --image $containerName:latest $containerName"
+        echo "updated docker service"
+        sh "docker service ls"
+    } else {
+        echo "docker service is not created, creating a new service now"
+        sh "docker service create --name $containerName --publish 8000:8000 $containerName:latest"
+        echo "Service got created and runs on port 8000"
+    }
+    //echo "Removing docker service"
+    //sh "docker service rm hellonodejs"
+    //sh "docker service ls"
 }
