@@ -33,7 +33,7 @@ node {
         }
     }
 
-    stage('Create service') {
+    stage('Create/Update service') {
         createService(container_name)   
     }
 }
