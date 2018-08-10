@@ -1,10 +1,12 @@
 // load the http module
 var http = require('http');
+var os = require("os");
 
 // configure our HTTP server
 var server = http.createServer(function (request, response) {
+  var hostname = os.hostname();
   response.writeHead(200, {"Content-Type": "text/plain"});
-  response.end("Hello from a NodeJS application.\ne-mail: msheshagirirao@gmail.comi\n");
+  response.end("Hello from a NodeJS application.\ne-mail: msheshagirirao@gmail.com\nHostname:"+hostname);
 });
 
 // listen on localhost:8000
