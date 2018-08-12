@@ -15,13 +15,6 @@ node {
         app = docker.build("${env.registry}/${env.repository}/hellonodejs:${env.BUILD_NUMBER}")
     }
 
-    stage('Test image') {
-    
-        app.inside {
-            sh 'echo "No tests to run."'
-        }
-    }
-
     stage('Push image') {
         /* Finally, we'll push the image with two tags:
          * First, the incremental build number from Jenkins
@@ -35,6 +28,11 @@ node {
 
     stage('Create/Update service') {
         createService(container_name)   
+    }
+
+    stage('Test image') {
+        echo "Running postman tests."
+        sh "docker run -v {env.WORKSPACE}/Hello-NodeJS/collections:/etc/newman  postman/newman_alpine33:latest --collection=\"Hello-NodeJS.postman_collection.json\"  --html=\"newman-results.html\""
     }
 }
 
