@@ -1,0 +1,48 @@
+{
+	"info": {
+		"name": "Hello-NodeJS",
+		"_postman_id": "192ce667-4539-6011-d294-78e3401c474a",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Hello-NodeJS",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f863b60e-8b12-4433-a0b7-ecb3e5b7e0ff",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Body matches string\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"msheshagirirao@gmail.com\");",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://172.16.49.65:8000/",
+					"protocol": "http",
+					"host": [
+						"172",
+						"16",
+						"49",
+						"65"
+					],
+					"port": "8000",
+					"path": [
+						""
+					]
+				},
+				"description": "test if the Hello-NodeJS Application is up and running."
+			},
+			"response": []
+		}
+	]
+}
