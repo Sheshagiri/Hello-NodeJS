@@ -32,7 +32,7 @@ node {
 
     stage('Test image') {
         echo "Running postman tests."
-        sh "docker run -v {env.WORKSPACE}/Hello-NodeJS/collections:/etc/newman  postman/newman_alpine33:latest --collection=\"Hello-NodeJS.postman_collection.json\"  --html=\"newman-results.html\""
+        sh "docker run -v ${env.WORKSPACE}/Hello-NodeJS/collections:/etc/newman  postman/newman_alpine33:latest --collection=\"Hello-NodeJS.postman_collection.json\"  --html=\"${env.WORKSPACE}/Hello-NodeJS/newman-results.html\""
     }
 }
 
