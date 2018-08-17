@@ -65,7 +65,7 @@ def createService(containerName){
 
 def testService(){
     //sh "docker run -v ${env.WORKSPACE}/collections:/etc/newman  postman/newman_alpine33:latest --collection=\"Hello-NodeJS.postman_collection.json\"  --html=\"${env.WORKSPACE}/newman-results.html\""
-    def status = sh (script:"docker run -v ${env.WORKSPACE}/collections:/etc/newman  postman/newman_alpine33:latest --collection=\"Hello-NodeJS.postman_collection.json\"  --html=\"${env.WORKSPACE}/newman-results.html\"", returnStatus:true).toString.trim()
+    def status = sh (script:"docker run -v ${env.WORKSPACE}/collections:/etc/newman  postman/newman_alpine33:latest --collection=\"Hello-NodeJS.postman_collection.json\"  --html=\"${env.WORKSPACE}/newman-results.html\"", returnStatus:true)
     return status
 }
 
