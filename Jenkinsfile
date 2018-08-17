@@ -30,9 +30,15 @@ node {
         createService(container_name)   
     }
 
-    stage('Test image') {
-        echo "Running postman tests."
-        sh "docker run -v ${env.WORKSPACE}/collections:/etc/newman  postman/newman_alpine33:latest --collection=\"Hello-NodeJS.postman_collection.json\"  --html=\"${env.WORKSPACE}/newman-results.html\""
+    stage('Run Integration Tests') {
+        echo "Running integration test via postman."
+        def exit_status = testService()
+        if (exit_status != "0"){
+            echo "Tests failed. Rolling back the changes made."
+            rollbackChanges()
+        } else {
+            echo "All the test passed, service is running with the latest docker image(${env.registry}/${env.repository}/hellonodejs:${env.BUILD_NUMBER})."
+        }
     }
 }
 
@@ -54,4 +60,18 @@ def createService(containerName){
     //echo "Removing docker service"
     //sh "docker service rm hellonodejs"
     //sh "docker service ls"
+}
+
+
+def testService(){
+    //sh "docker run -v ${env.WORKSPACE}/collections:/etc/newman  postman/newman_alpine33:latest --collection=\"Hello-NodeJS.postman_collection.json\"  --html=\"${env.WORKSPACE}/newman-results.html\""
+    def status = sh (script:"docker run -v ${env.WORKSPACE}/collections:/etc/newman  postman/newman_alpine33:latest --collection=\"Hello-NodeJS.postman_collection.json\"  --html=\"${env.WORKSPACE}/newman-results.html\"", returnStatus:true).toString.trim()
+    return status
+}
+
+def rollbackChanges(){
+    sh "docker service rollback hellonodejs"
+    echo "Rollback completed."
+    echo "Docker service configuration."
+    sh "docker service ls"
 }
