@@ -4,8 +4,10 @@ node {
 
     stage('Clone repository') {
         /* Let's make sure we have the repository cloned to our workspace */
-
+	echo "Git Clone"
         checkout scm
+	sh "git branch"
+	
     }
 
     stage('Build image') {
