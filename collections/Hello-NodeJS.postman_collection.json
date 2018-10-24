@@ -1,8 +1,7 @@
 {
 	"info": {
-		"name": "Hello-NodeJS",
 		"_postman_id": "192ce667-4539-6011-d294-78e3401c474a",
-		"description": "",
+		"name": "Hello-NodeJS",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -13,19 +12,22 @@
 					"listen": "test",
 					"script": {
 						"id": "f863b60e-8b12-4433-a0b7-ecb3e5b7e0ff",
-						"type": "text/javascript",
 						"exec": [
 							"pm.test(\"Body matches string\", function () {",
 							"    pm.expect(pm.response.text()).to.include(\"msheshagirirao@gmail.com\");",
 							"});"
-						]
+						],
+						"type": "text/javascript"
 					}
 				}
 			],
 			"request": {
 				"method": "GET",
 				"header": [],
-				"body": {},
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
 				"url": {
 					"raw": "http://172.16.49.100:8000/",
 					"protocol": "http",
