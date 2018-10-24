@@ -6,7 +6,7 @@ var os = require("os");
 var server = http.createServer(function (request, response) {
   var hostname = os.hostname();
   response.writeHead(200, {"Content-Type": "text/plain"});
-  response.end("Hello from a NodeJS application.\ne-mail: msheshagirirao@gmail.com\nHostname:"+hostname+"\n");
+  response.end("Hello from a NodeJS application.\ne-mail: sheshagiri@gmail.com\nHostname:"+hostname+"\n");
 });
 
 // listen on localhost:8000
