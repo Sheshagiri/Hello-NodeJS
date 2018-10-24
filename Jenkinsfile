@@ -35,9 +35,7 @@ node {
     stage('Run Integration Tests') {
         echo "Running integration test via postman."
         def exit_status = testService()
-        echo "exit code of tests is:"
-        echo exit_status
-        if (exit_status != "0"){
+        if (exit_status != 0){
             echo "Tests failed. Rolling back the changes made."
             rollbackChanges()
         } else {
