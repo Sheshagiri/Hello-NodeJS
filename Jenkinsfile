@@ -17,6 +17,10 @@ node {
         app = docker.build("${env.registry}/${env.repository}/hellonodejs:${env.BUILD_NUMBER}")
     }
 
+    stage('Run Unit Tests'){
+        echo "running unit tests."
+    }
+
     stage('Push image') {
         /* Finally, we'll push the image with two tags:
          * First, the incremental build number from Jenkins
@@ -32,7 +36,7 @@ node {
         createService(container_name)   
     }
 
-    stage('Run Integration Tests') {
+    stage('Run Regression') {
         echo "Running integration test via postman."
         def exit_status = testService()
         if (exit_status != 0){
