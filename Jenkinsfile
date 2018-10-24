@@ -56,7 +56,7 @@ def createService(containerName){
         sh "docker service ls"
     } else {
         echo "docker service is not created, creating a new service now with ${env.registry}/${env.repository}/hellonodejs:${env.BUILD_NUMBER} as image"
-        sh "docker service create --name $containerName --publish 8000:8000 ${env.registry}/${env.repository}/hellonodejs:${env.BUILD_NUMBER}"
+        sh "docker service create --name $containerName --replicas 4 --publish 8000:8000 ${env.registry}/${env.repository}/hellonodejs:${env.BUILD_NUMBER}"
         echo "Service got created and runs on port 8000"
     }
     //echo "Removing docker service"
